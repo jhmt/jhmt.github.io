@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Brainmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Brainmine">
+<meta property="og:url" content="https://jhmt.github.io/index.html">
+<meta property="og:site_name" content="Brainmine">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Brainmine">
+<meta name="twitter:creator" content="@coolwuxing">
+  
+    <link rel="alternative" href="/atom.xml" title="Brainmine" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="/css/shCore.css" type="text/css" rel="stylesheet" />
+  <link href="/css/shCoreMidnight.css" type="text/css" rel="stylesheet" />
+  <link href="/css/shThemeMidnight.css" type="text/css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43935113-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Brainmine</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Jun&#39;s programming memo</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github-link" class="nav-icon" href="https://github.com/jhmt" title="Github"></a>
+        <a id="nav-linkedin-link" class="nav-icon" href="https://nz.linkedin.com/in/junhashimotonz" title="LinkedIn"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jhmt.github.io"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Angular-Server-Side-Rendering-on-AWS-Lambda" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/31/Angular-Server-Side-Rendering-on-AWS-Lambda/" class="article-date">
+  <time datetime="2017-12-31T06:18:48.000Z" itemprop="datePublished">2017-12-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Angular/">Angular</a>►<a class="article-category-link" href="/categories/Angular/Angular-Universal/">Angular Universal</a>►<a class="article-category-link" href="/categories/Angular/Angular-Universal/AWS-Lambda/">AWS Lambda</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/31/Angular-Server-Side-Rendering-on-AWS-Lambda/">Angular Server Side Rendering on AWS Lambda</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This is an example of <a href="https://angular.io/guide/universal" target="_blank" rel="noopener">Angular Universal</a> app running on AWS Lambda.<br>The finished sample code: <a href="https://github.com/jhmt/ng-ssr-on-aws-lambda" target="_blank" rel="noopener">jhmt/ng-ssr-on-aws-lambda</a></p>
+<h4 id="Prerequesites"><a href="#Prerequesites" class="headerlink" title="Prerequesites"></a>Prerequesites</h4><ul>
+<li>Node.js (version 6.9.1 or upper)</li>
+<li>AWS account (for deploying to AWS Lambda)</li>
+<li><a href="https://www.npmjs.com/package/serverless" target="_blank" rel="noopener">Serverless framework installed</a></li>
+<li><a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/" target="_blank" rel="noopener">AWS Credentials</a></li>
+</ul>
+<h4 id="Used-frameworks-technologies"><a href="#Used-frameworks-technologies" class="headerlink" title="Used frameworks/technologies"></a>Used frameworks/technologies</h4><ul>
+<li><a href="https://cli.angular.io/" target="_blank" rel="noopener">Angular CLI</a></li>
+<li><a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a></li>
+<li><a href="http://expressjs.com/" target="_blank" rel="noopener">Express</a></li>
+<li><a href="https://serverless.com/" target="_blank" rel="noopener">Serverless framework</a></li>
+</ul>
+<h2 id="How-does-AWS-Lambda-render-html"><a href="#How-does-AWS-Lambda-render-html" class="headerlink" title="How does AWS Lambda render html?"></a>How does AWS Lambda render html?</h2><p>Angular Universal works as a middleware for web server frameworks.<br>e.g. <a href="http://expressjs.com/" target="_blank" rel="noopener">Express</a>, <a href="https://hapijs.com/" target="_blank" rel="noopener">Hapi</a> and <a href="https://www.asp.net/" target="_blank" rel="noopener">ASP.NET</a>.<br>Meanwhile, an Express app can work on AWS Lambda with using “aws-serverless-express” node module provided by AWS. In this sample, AWS Lambda renders html with <a href="https://github.com/awslabs/aws-serverless-express" target="_blank" rel="noopener">aws-serverless-express</a> and <a href="https://github.com/angular/universal/tree/master/modules/express-engine" target="_blank" rel="noopener">Angular Express Engine</a>.</p>
+<h2 id="Clone-and-run-universal-starter"><a href="#Clone-and-run-universal-starter" class="headerlink" title="Clone and run universal-starter"></a>Clone and run universal-starter</h2><pre class="brush: bash;">
+git clone https://github.com/angular/universal-starter.git
+</pre>
+
+
+<h2 id="Prepare-deploy"><a href="#Prepare-deploy" class="headerlink" title="Prepare deploy"></a>Prepare deploy</h2><ol>
+<li>Move “server.ts” and “webpack.server.config.js” in another folder (e.g. “/ssr”)</li>
+<li>Split the “listen” block into the new file to start in order to reuse the app on AWS Lambda.</li>
+<li>Modify “webpack:server” script in “package.json” to find the moved webpack file.</li>
+<li>Make sure “npm run build:ssr” works fine.</li>
+</ol>
+<h2 id="Initialize-Serverless"><a href="#Initialize-Serverless" class="headerlink" title="Initialize Serverless"></a>Initialize Serverless</h2><ol>
+<li>create “serverless.yml” file. <pre class="brush: bash;">
+serverless create --template aws-nodejs --name ng-ssr-aws-lambda
+</pre>
+
+</li>
+</ol>
+<h2 id="Create-Lambda-entry-point"><a href="#Create-Lambda-entry-point" class="headerlink" title="Create Lambda entry point"></a>Create Lambda entry point</h2><ol>
+<li>create a new folder to store lambda function handler and webpack config (e.g. “lambda”)</li>
+<li>create a handler file (e.g. index.ts)</li>
+<li>create a webpack config file.</li>
+</ol>
+<h2 id="Modify-serverless-yml-file"><a href="#Modify-serverless-yml-file" class="headerlink" title="Modify serverless.yml file"></a>Modify serverless.yml file</h2><ol>
+<li>modify to route GET services to “lambda” folder</li>
+</ol>
+<pre class="brush: js;">
+service: ng-ssr-aws-lambda
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: ap-southeast-2
+  memorySize: 128
+plugins:
+- serverless-webpack
+custom:
+  webpack: lambda/webpack.config.js
+functions:
+  main:
+    handler: lambda/index.handler
+    events:
+    - http:
+        path: /
+        method: get
+    - http:
+        path: "{proxy+}"
+        method: get
+</pre>
+
+<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p><strong>Make sure your AWS credentials have been set before deploy -</strong><br><a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/" target="_blank" rel="noopener">Serverless Framework - AWS Lambda Guide - Credentials</a></p>
+<pre class="brush: bash;">
+"npm run build:ssr && serverless deploy"
+</pre>
+If you got the errors of "TS2304: Cannot find name 'AsyncIterator' or TS2304: Cannot find name 'AsyncIterable'", add the following in "tsconfig.json"
+<pre class="brush: xml;">
+"lib": [
+     "es2017",
+     "dom",
+     "esnext.asynciterable"
+   ]
+</pre>
+
+
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2017/12/31/Angular-Server-Side-Rendering-on-AWS-Lambda/" data-id="cjccpa0k20000esqfwhseclxk" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2017/12/31/Angular-Server-Side-Rendering-on-AWS-Lambda/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AWS-Lambda/">AWS Lambda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular-Universal/">Angular Universal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Serverless/">Serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Create-Download-Link" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/22/Create-Download-Link/" class="article-date">
+  <time datetime="2016-04-22T06:53:03.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/22/Create-Download-Link/">Create &#34;Download&#34; Link</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>“Download” link can be generated by HTML5 “a” tag with “download” attribute OR JavaScript code.</p>
+<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><pre class="brush: xml;">
+&lt;a href="./sample.txt" download="SAMPLE">Download&lt;/a>
+</pre>
+
+<p>This should work in most of modern browsers except IE. JavaScript code can replace this on these exceptions.</p>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>The file to download is saved in memory first with <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest" target="_blank" rel="noopener">XMLHttpRequest</a> and then saved as a file with <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL" target="_blank" rel="noopener">URL.createObjectURL</a>. (<a href="https://msdn.microsoft.com/en-US/library/hh779016.aspx" target="_blank" rel="noopener">msSaveBlob</a> in IE/Edge)</p>
+<h3 id="JavaScript-Code"><a href="#JavaScript-Code" class="headerlink" title="JavaScript Code"></a>JavaScript Code</h3><pre class="brush: js;">
+function downloadFile(url, filename) {
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.responseType = "blob";
+  xhr.onload = function (oEvent) {
+    var blob = xhr.response;
+    if (window.navigator.msSaveBlob) {
+      // IE/Edge
+      window.navigator.msSaveBlob(blob, filename);
+    }
+    else {
+      var objectURL = window.URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      document.body.appendChild(link);
+      link.href = objectURL;
+      link.download = filename;
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+  xhr.send();
+}
+</pre>
+
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><pre class="brush: xml;">
+&lt;a href="./sample.txt" download="SAMPLE"
+   onclick="javascript: downloadFile('./sample.txt', 'sample.txt'); return false;"
+   >Download&lt;/a>
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2016/04/22/Create-Download-Link/" data-id="cjccpa0lh000desqfavgnkjnc" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2016/04/22/Create-Download-Link/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Best-practices-to-keep-the-sensitive-information-secret" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/27/Best-practices-to-keep-the-sensitive-information-secret/" class="article-date">
+  <time datetime="2016-02-26T22:45:24.000Z" itemprop="datePublished">2016-02-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Cloud/">Cloud</a>►<a class="article-category-link" href="/categories/Cloud/Azure/">Azure</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/27/Best-practices-to-keep-the-sensitive-information-secret/">Best practices to keep the sensitive information out of the source code and secret in Azure</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>From Scott Hanselman’s blog:<br><a href="http://www.hanselman.com/blog/BestPracticesForPrivateConfigDataAndConnectionStringsInConfigurationInASPNETAndAzure.aspx" target="_blank" rel="noopener">Best practices for private config data and connection strings in configuration in ASP.NET and Azure</a></p>
+<p>This article explains how to hide the sensitive information like Connection String in ASP.NET 4.6 and 5.0 (Core 1.0).</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2016/02/27/Best-practices-to-keep-the-sensitive-information-secret/" data-id="cjccpa0kw0005esqfqgz0xs5x" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2016/02/27/Best-practices-to-keep-the-sensitive-information-secret/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Azure/">Azure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Connection-String/">Connection String</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SOLID-Principles" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/21/SOLID-Principles/" class="article-date">
+  <time datetime="2016-02-20T22:19:40.000Z" itemprop="datePublished">2016-02-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OOP/">OOP</a>►<a class="article-category-link" href="/categories/OOP/SOLID/">SOLID</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/21/SOLID-Principles/">OOP Principles - SOLID</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>SOLID</strong> is an acronym of the following five basic principles of Object Oriented Programming and design.</p>
+<ul>
+<li><a href="#SRP">Single Responsibility Principle</a></li>
+<li><a href="#OCP">Open Closed Principle</a></li>
+<li><a href="#LSP">Liskov Substitution Principle</a></li>
+<li><a href="#ISP">Interface Segregation Principle</a></li>
+<li><a href="#DIP">Denedency Inversion Principle</a></li>
+</ul>
+<p></p><h2 id="SRP">1. Single Responsibility Principle</h2><br><em>There should never be more than one reason for a class to change</em><p></p>
+<h4 id="What"><a href="#What" class="headerlink" title="What:"></a>What:</h4><ul>
+<li>2 reasons to change means 2 responsibilities.</li>
+</ul>
+<h4 id="Why"><a href="#Why" class="headerlink" title="Why:"></a>Why:</h4><ul>
+<li>A class with multiple responsibilities is likely unrobust.</li>
+</ul>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h4><ul>
+<li>Modem class</li>
+</ul>
+<p><img align="left" src="/2016/02/21/SOLID-Principles/Modem.png"><br><br clear="left"></p>
+<p>Responsibilities of Modem class can be separated into <strong>Managing connection(Connect/Disconnect)</strong> and <strong>Data communication(Send/Receive)</strong>. If these responsibilities are modified separately, this class violates the SRP.</p>
+<h4 id="How"><a href="#How" class="headerlink" title="How:"></a>How:</h4><ol>
+<li>Design abiding by <a href="https://en.wikipedia.org/wiki/GRASP_(object-oriented_design)" target="_blank" rel="noopener">GRASP</a></li>
+<li>Work with design patterns: Proxy, Facade or Iterator</li>
+<li>TDD</li>
+</ol>
+<p></p><h2 id="ODP">2. Open-Closed Principle</h2><br><em>Classes should be open for extension but closed for modification.</em><p></p>
+<h4 id="What-1"><a href="#What-1" class="headerlink" title="What:"></a>What:</h4><ul>
+<li>“Open”<ul><li>Extensible for behaviors</li></ul></li>
+<li>“Closed”<ul><li>Changes to behaviors DO NOT affect to the source code or assemblies</li></ul>
+
+</li>
+</ul>
+<h4 id="Why-1"><a href="#Why-1" class="headerlink" title="Why:"></a>Why:</h4><ul>
+<li>For benefits of OOP: Flexibility, Reusability and Maintenancibility</li>
+</ul>
+<h4 id="Example-1"><a href="#Example-1" class="headerlink" title="Example:"></a>Example:</h4><ul>
+<li>Violated case</li>
+</ul>
+<p><img align="left" src="/2016/02/21/SOLID-Principles/OCP1.png"><br><br clear="left"></p>
+<p>Client is using Server class. The Client class has to be changed to connect to another Server.</p>
+<ul>
+<li>Open-Closed case:</li>
+</ul>
+<p><img align="left" src="/2016/02/21/SOLID-Principles/OCP2.png"><br><br clear="left"></p>
+<p>No changes have to be made when the Server is modified.</p>
+<h4 id="How-1"><a href="#How-1" class="headerlink" title="How:"></a>How:</h4><ol>
+<li>Work with design patterns: Strategy or Template Method</li>
+<li>TDD</li>
+</ol>
+<p></p><h2 id="LSP">3. Liskov Substitution Principle</h2><br><em>Subtypes must be substitutable for their base types.</em><p></p>
+<h4 id="What-2"><a href="#What-2" class="headerlink" title="What:"></a>What:</h4><ul>
+<li>A method uses the base class can use any sub classes.</li>
+<li>Designer/Programmer has to guarantee the behavior of sub class as same as the base class.</li>
+</ul>
+<h4 id="Why-2"><a href="#Why-2" class="headerlink" title="Why:"></a>Why:</h4><ul>
+<li>Violoation of LSP means violoation of OCP</li>
+</ul>
+<h4 id="Example-2"><a href="#Example-2" class="headerlink" title="Example:"></a>Example:</h4><ul>
+<li>Violated case</li>
+</ul>
+<p><img align="left" src="/2016/02/21/SOLID-Principles/LSP1.png"><br><br clear="left"></p>
+<pre class="brush: c-sharp;">
+public void DrawShape(Shape shape)
+{
+    if (shape is Square)
+    {
+        Square sq = (Square)shape;
+        sq.Draw();
+    }
+    else if (shape is Circle)
+    {
+        Circle c = (Circle)shape;
+        c.Draw();
+    }
+}
+</pre>
+
+<p>Square and Circle classes cannot substitute Shape the base class.</p>
+<h4 id="How-2"><a href="#How-2" class="headerlink" title="How:"></a>How:</h4><ol>
+<li>Design by Contract</li>
+</ol>
+<p></p><h2 id="ISP">4. Interface Segregation Principle</h2><br><em>Clients should not be forced to depend upon interfaces that they do not use.</em><p></p>
+<h4 id="What-3"><a href="#What-3" class="headerlink" title="What:"></a>What:</h4><ul>
+<li>An interface should not have too many features. (That is called ‘fat’ interface.)</li>
+</ul>
+<h4 id="Why-3"><a href="#Why-3" class="headerlink" title="Why:"></a>Why:</h4><ul>
+<li>A client class has to implements all the ‘fat’ interface’s methods even if the class doesn’t need all of them. This could cause unnessesary modifications.</li>
+</ul>
+<h4 id="Example-3"><a href="#Example-3" class="headerlink" title="Example:"></a>Example:</h4><ul>
+<li>Violated case</li>
+</ul>
+<p><img align="left" src="/2016/02/21/SOLID-Principles/ISP1.png"><br><br clear="left"></p>
+<p>IStorage interface has <em>RollBack</em> and <em>Save</em> methods. However, <em>RollBack</em> method is used only by DBStorage class.</p>
+<h4 id="How-3"><a href="#How-3" class="headerlink" title="How:"></a>How:</h4><p>Split interfaces according to its feature.</p>
+<p><img align="left" src="/2016/02/21/SOLID-Principles/ISP2.png"><br><br clear="left"></p>
+<p></p><h2 id="DIP">5. Dependency Inversion Principle</h2><br><em>High level modules should not depend upon low level modules. Both should depend upon abstractions. Secondly, abstractions should not depend upon details. Details should depend upon abstractions.</em><p></p>
+<h4 id="What-4"><a href="#What-4" class="headerlink" title="What:"></a>What:</h4><ul>
+<li>A module should receive low level modules upon using them without having strong dependency.</li>
+</ul>
+<h4 id="Why-4"><a href="#Why-4" class="headerlink" title="Why:"></a>Why:</h4><ul>
+<li>A high level module depending on low level ones is affected by the low level modifications.</li>
+<li>This should be inverted because high level should be superior.</li>
+</ul>
+<h4 id="Example-4"><a href="#Example-4" class="headerlink" title="Example:"></a>Example:</h4><p><img align="left" src="/2016/02/21/SOLID-Principles/DIP1.png"><br><br clear="left"></p>
+<p>High level modules don’t depend on low level modules.</p>
+<h4 id="How-4"><a href="#How-4" class="headerlink" title="How:"></a>How:</h4><p>Design with DI(IoC) container.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2016/02/21/SOLID-Principles/" data-id="cjccpa0mv0015esqfshd4zkqh" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2016/02/21/SOLID-Principles/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SOLID/">SOLID</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Benefit-Of-Using-IoC-Container" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/07/Benefit-Of-Using-IoC-Container/" class="article-date">
+  <time datetime="2016-02-07T09:02:10.000Z" itemprop="datePublished">2016-02-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>►<a class="article-category-link" href="/categories/Design-Pattern/Dependency-Injection/">Dependency Injection</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/07/Benefit-Of-Using-IoC-Container/">Benefit of using IoC Container</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ioc Container provides some benefits when using Dependency Injection design pattern.</p>
+<p>Let’s see sample code:</p>
+<h3 id="Interface-and-Class"><a href="#Interface-and-Class" class="headerlink" title="Interface and Class"></a>Interface and Class</h3><pre class="brush: c-sharp;">
+public interface ISender
+{
+    void Send(string message);
+}
+
+public class EmailSender : ISender
+{
+    public void Send(string message)
+    {
+        Console.WriteLine("{0} has been sent via email.", message);
+    }
+}
+
+public class CourierSender : ISender
+{
+    public void Send(string message)
+    {
+        Console.WriteLine("{0} has been sent via a courier.", message);
+    }
+}
+</pre>
+
+<h3 id="Case-1-DI-without-Ioc-Container"><a href="#Case-1-DI-without-Ioc-Container" class="headerlink" title="Case 1: DI without Ioc Container"></a>Case 1: DI without Ioc Container</h3><pre class="brush: c-sharp;">
+public class Messenger
+{
+    private ISender _sender;
+
+    public Messenger(ISender sender)
+    {
+        _sender = sender;
+    }
+
+    public void Send(string message)
+    {
+        _sender.Send(message);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Send via email
+        var messenger = new Messenger(new EmailSender());
+        messenger.Send("Congrats!");
+        // Send via courier
+        messenger = new Messenger(new CourierSender());
+        messenger.Send("Congrats!");
+    }
+}
+</pre>
+
+<p>This has the following problems:</p>
+<ul>
+<li>The more Messenger class is used, the more <em>new</em> intantiation. This will cause less maintenancebility.</li>
+<li>EmailSender and CourierSender depend on other classes. This makes instantiating them to each layer when they have hierarchy.</li>
+<li>Less maintenancebility to changes to EmailSender and CourierSender structures.</li>
+</ul>
+<p>IoC Container provides solutions for these problems.<br>Following is a sample usage of IoC container, <a href="http://www.ninject.org/" target="_blank" rel="noopener"><em>Ninject</em></a>. <em>Ninject</em> is avaliable on Nuget package manager.</p>
+<h3 id="Case-2-DI-with-Ioc-Container"><a href="#Case-2-DI-with-Ioc-Container" class="headerlink" title="Case 2: DI with Ioc Container"></a>Case 2: DI with Ioc Container</h3><pre class="brush: c-sharp;">
+using Ninject;
+class Program
+{
+    static void Main(string[] args)
+    {
+        // IoC Container
+        var kernel = new StandardKernel();
+        // Send via email
+        kernel.Bind&lt;ISender>().To&lt;EmailSender>();
+        kernel.Get&lt;ISender>().Send("Congrats!");
+        // Send via courier
+        kernel.Rebind&lt;ISender>().To&lt;CourierSender>();
+        kernel.Get&lt;ISender>().Send("Congrats!");
+    }
+}
+</pre>
+
+<p>As shown in the sample code, IoC Conatiner provides some benefits:</p>
+<ul>
+<li>Centralizing instantiation</li>
+<li>Encapsulating class members</li>
+<li>More testability with using mock code </li>
+</ul>
+<p>These provide maintenancebility, flexibility and testability.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2016/02/07/Benefit-Of-Using-IoC-Container/" data-id="cjccpa0kq0004esqfec9x3s18" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2016/02/07/Benefit-Of-Using-IoC-Container/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dependency-Injection/">Dependency Injection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ninject/">Ninject</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Performance-Tuning-With-Window-Function" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/04/Performance-Tuning-With-Window-Function/" class="article-date">
+  <time datetime="2016-01-04T06:36:41.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Database/">Database</a>►<a class="article-category-link" href="/categories/Database/Performance-Tuning/">Performance Tuning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/04/Performance-Tuning-With-Window-Function/">Performance Tuning with Window Function</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Thinking of the best solution to get the product of each group which were registered earliest.</p>
+<h3 id="Product-Table"><a href="#Product-Table" class="headerlink" title="Product Table"></a>Product Table</h3><pre class="brush: plain;">
+| ProductId  | GroupId | RegisterDate | Price   |
+|------------|---------|--------------|---------|
+|      1     |   101   |  2016-01-01  | 250.00  |
+|      2     |   101   |  2016-02-01  | 1200.00 |
+|      3     |   101   |  2016-01-23  | 70.00   |
+|      4     |   201   |  2016-01-14  | 800.00  |
+|      5     |   201   |  2016-01-31  | 20.00   |
+|      6     |   301   |  2016-10-01  | 25.00   |
+|      7     |   301   |  2016-05-04  | 900.00  |
+|      8     |   301   |  2016-12-01  | 750.00  |
+|      9     |   301   |  2016-01-31  | 890.00  |
+|     10     |   301   |  2016-11-11  | 750.00  |
+|     11     |   401   |  2016-08-25  | 100.00  |
+</pre>
+
+<h3 id="Expected-Result"><a href="#Expected-Result" class="headerlink" title="Expected Result"></a>Expected Result</h3><pre class="brush: plain;">
+| GroupId | RegisterDate | Price  |
+|---------|--------------|--------|
+|   101   |  2016-01-01  | 250.00 |
+|   201   |  2016-01-14  | 800.00 |
+|   301   |  2016-01-31  | 890.00 |
+|   401   |  2016-08-25  | 100.00 |
+</pre>
+
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>The easiest way to solve this is to use Join clause like this:</p>
+<pre class="brush: sql;">
+
+SELECT p1.GroupId, p1.RegisterDate, p1.Price
+FROM Product AS p1
+INNER JOIN (SELECT GroupId, MIN(RegisterDate) AS [MinDate] FROM Product GROUP BY GroupId) AS p2
+ON p1.GroupId = p2.GroupId AND p1.RegisterDate = p2.MinDate;
+
+</pre>
+
+<p><em>Solution 1</em> has a performance problem because of following 4 reasons:</p>
+<ul>
+<li>Sub queries tend to be stored in a temporary area (memory, disks, etc…). This will cause an overhead.</li>
+<li>Sub queries don’t have indexes or constraint to optimize.</li>
+<li>Join queries are more often than not expensive and have risks - Execute plan might be changed according to the scalability.</li>
+<li>2 scans to the table.</li>
+</ul>
+<h3 id="Avoid-Join-Query-with-Window-Function"><a href="#Avoid-Join-Query-with-Window-Function" class="headerlink" title="Avoid Join Query with Window Function"></a>Avoid Join Query with Window Function</h3><p>In this case, <strong>“ROW_NUMBER”</strong> window function enables us to avoid using join query. </p>
+<h4 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h4><pre class="brush: sql;">
+
+SELECT p.GroupId, p.RegisterDate, p.Price
+FROM 
+(SELECT GroupId, RegisterDate, Price, 
+ ROW_NUMBER() OVER (PARTITION BY GroupId ORDER BY RegisterDate) AS [rowNum]
+FROM Product) AS p
+WHERE p.rowNum = 1
+
+</pre>
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2016/01/04/Performance-Tuning-With-Window-Function/" data-id="cjccpa0mb000uesqff11yneij" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2016/01/04/Performance-Tuning-With-Window-Function/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Performance-Tuning/">SQL Performance Tuning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Join-Algorithm-On-SQL-Server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/02/Join-Algorithm-On-SQL-Server/" class="article-date">
+  <time datetime="2016-01-02T06:57:54.000Z" itemprop="datePublished">2016-01-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Database/">Database</a>►<a class="article-category-link" href="/categories/Database/SQL-Server/">SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/02/Join-Algorithm-On-SQL-Server/">Join Algorithm on SQL Server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://msdn.microsoft.com/en-us/library/ms173815.aspx" target="_blank" rel="noopener">Join Hints</a> enforce query optimizer to use a specified join algorithm.</p>
+<p>The characteristics of the algorithms are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Nested Loops</em></td>
+<td>- Very fast on “Small driven table”  <br>- Less consume of memory and disk (suitable for OLTP) <br>- Available for non-equijoins joins</td>
+<td>- Unsuitable for large tables join</td>
+</tr>
+<tr>
+<td><em>Hash</em></td>
+<td>- Suitable for large tables join</td>
+<td>- Expensive for memory (unsuitable for OLTP)<br>- Unavailable for non-equijoins joins</td>
+</tr>
+<tr>
+<td><em>Sort Merge</em></td>
+<td>- Suitable for large tables join<br>- Available for non-equijoins joins</td>
+<td>- Expensive for memory (unsuitable for OLTP)<br>- Unavailable for non-equijoins joins<br>- Inefficient fro unsorted tables.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Optimum-algorithms"><a href="#Optimum-algorithms" class="headerlink" title="Optimum algorithms"></a>Optimum algorithms</h3><p>Based on table size, the proper algorithms for each join query are as follows: </p>
+<ol>
+<li><p>Small to Small<br>“Nested Loops”</p>
+</li>
+<li><p>Small to Large<br>“Nested Loops” with using an index of the large table’s join key.<br>In case of many rows, exchange the driven table from the small one to the large one. Or “Hash” algorithm might be better solution.</p>
+</li>
+<li><p>Large to Large<br>“Hash” should be the first try. If the join key has been sorted, then try “Sort Merge”</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2016/01/02/Join-Algorithm-On-SQL-Server/" data-id="cjccpa0m6000qesqfsc1clkhp" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2016/01/02/Join-Algorithm-On-SQL-Server/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance-Tuning/">Performance Tuning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL-Server/">SQL Server</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Get-Index-Of-ForEach-Loop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/30/Get-Index-Of-ForEach-Loop/" class="article-date">
+  <time datetime="2015-12-30T04:46:32.000Z" itemprop="datePublished">2015-12-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/NET/">.NET</a>►<a class="article-category-link" href="/categories/NET/LINQ/">LINQ</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/30/Get-Index-Of-ForEach-Loop/">Get the index of foreach loop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://msdn.microsoft.com/en-us/library/bb534869%28v=vs.100%29.aspx" target="_blank" rel="noopener">Select method (Sysmte.Linq namespace)</a> has an overload to return the loop index.</p>
+<p>With calling this overload, the index of the loop can be get without a temporary variable.</p>
+<h3 id="C-code"><a href="#C-code" class="headerlink" title="C# code"></a>C# code</h3><pre class="brush: c-sharp;">
+var array = new[] { "A", "B", "C" };
+
+foreach (var item in array.Select((v, i) => new { v, i }))
+{
+    Console.WriteLine("value = {0}, index = {1}", item.v, item.i);
+}
+</pre>
+
+
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><pre class="brush: bash;">
+value = A, index = 0
+value = B, index = 1
+value = C, index = 2
+</pre>    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2015/12/30/Get-Index-Of-ForEach-Loop/" data-id="cjccpa0lx000mesqfrlr6v02o" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2015/12/30/Get-Index-Of-ForEach-Loop/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linq/">Linq</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-DB-Access-from-Razor-view-through-IronPython" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/12/DB-Access-from-Razor-view-through-IronPython/" class="article-date">
+  <time datetime="2015-12-12T09:58:34.000Z" itemprop="datePublished">2015-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>►<a class="article-category-link" href="/categories/Python/IronPython/">IronPython</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/12/DB-Access-from-Razor-view-through-IronPython/">Database access from Razor view through IronPython</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>With IronPython, razor engine views can access to Database directly.</p>
+<h3 id="Razor-View"><a href="#Razor-View" class="headerlink" title="Razor View"></a>Razor View</h3><pre class="brush: c-sharp;">
+@using IronPython.Hosting;
+@using Microsoft.Scripting.Hosting;
+
+@{
+    ScriptEngine python = Python.CreateEngine();
+    string path @"C:\scripts\hello.py";
+
+    dynamic script = python.ExecuteFile(path);
+    string msg = script.hello(1);
+}
+
+&lt;h2>@msg&lt;/h2>
+</pre>
+
+
+<h3 id="Python-Script"><a href="#Python-Script" class="headerlink" title="Python Script"></a>Python Script</h3><pre class="brush: python;">
+import clr
+clr.AddReference('System.Data')
+from System.Data import *
+
+def hello(id) :
+    conn = SqlClient.SqlConnection("server=SERVER_ADDRESS;database=MyDB;uid=sa;password=PASSWORD")
+    conn.Open()
+
+    cmd = SqlClient.SqlCommand("SELECT Name FROM Member WHERE Id = @Id", conn)
+    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+    reader = cmd.ExecuteReader()
+
+    name = ''
+    reader.Read()
+    name = reader[0]
+
+    reader.Close()
+    conn.Close()
+
+    return "Hello!" + name
+</pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2015/12/12/DB-Access-from-Razor-view-through-IronPython/" data-id="cjccpa0ll000eesqfy0tbd2gu" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2015/12/12/DB-Access-from-Razor-view-through-IronPython/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IronPython/">IronPython</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Razor/">Razor</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Python-Script-in-CSharp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/07/Python-Script-in-CSharp/" class="article-date">
+  <time datetime="2015-12-07T03:01:39.000Z" itemprop="datePublished">2015-12-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>►<a class="article-category-link" href="/categories/Python/IronPython/">IronPython</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/07/Python-Script-in-CSharp/">Python Script in C#</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Python Script can be called from C# with using <a href="https://www.nuget.org/packages/IronPython" target="_blank" rel="noopener">IronPython</a>. </p>
+<h3 id="Python-Script"><a href="#Python-Script" class="headerlink" title="Python Script"></a>Python Script</h3><pre class="brush: python;">
+def hello(name) :
+    return "Hello! " + name
+
+</pre>
+
+<h3 id="C-code"><a href="#C-code" class="headerlink" title="C# code"></a>C# code</h3><pre class="brush: c-sharp;">
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
+
+void HelloPython
+{
+    ScriptEngine python = Python.CreateEngine();
+    string path = @"C:\scripts\hello.py";
+
+    dynamic script = python.ExecuteFile(path);
+    Console.WriteLine(script.hello("John"));
+}
+</pre>
+
+<pre class="brush: bash;">
+> Hello! John
+</pre>
+
+<p>This can be used in <strong>cshtml</strong> view files like this:</p>
+<pre class="brush: c-sharp;">
+@using IronPython.Hosting;
+@using Microsoft.Scripting.Hosting;
+
+@{
+    ScriptEngine python = Python.CreateEngine();
+    string path @"C:\scripts\hello.py";
+
+    dynamic script = python.ExecuteFile(path);
+    string msg = script.hello("John");
+}
+
+&lt;h2>@msg&lt;/h2>
+</pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jhmt.github.io/2015/12/07/Python-Script-in-CSharp/" data-id="cjccpa0me000wesqf06jia2df" class="article-share-link">Share</a>
+      
+        <a href="https://jhmt.github.io/2015/12/07/Python-Script-in-CSharp/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IronPython/">IronPython</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NET/">.NET</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/NET/ASP-NET-MVC/">ASP.NET MVC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/LINQ/">LINQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/UWP/">UWP</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Angular/">Angular</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Angular/Angular-Universal/">Angular Universal</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Angular/Angular-Universal/AWS-Lambda/">AWS Lambda</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud/">Cloud</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud/Azure/">Azure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Database/MongoDB/">MongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/Performance-Tuning/">Performance Tuning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/SQL-Server/">SQL Server</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/Dependency-Injection/">Dependency Injection</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OOP/">OOP</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/OOP/SOLID/">SOLID</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/IronPython/">IronPython</a><span class="category-list-count">2</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET-MVC/">ASP.NET MVC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS-Lambda/">AWS Lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular-Universal/">Angular Universal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Connection-String/">Connection String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Database/">Database</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dependency-Injection/">Dependency Injection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Globalization/">Globalization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Identity/">Identity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InkCanvas/">InkCanvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IronPython/">IronPython</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linq/">Linq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ninject/">Ninject</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance-Tuning/">Performance Tuning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Razor/">Razor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SOLID/">SOLID</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL-Performance-Tuning/">SQL Performance Tuning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL-Server/">SQL Server</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Serverless/">Serverless</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebAPI/">WebAPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XAML/">XAML</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET-MVC/" style="font-size: 12.5px;">ASP.NET MVC</a> <a href="/tags/AWS-Lambda/" style="font-size: 10px;">AWS Lambda</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/Angular-Universal/" style="font-size: 10px;">Angular Universal</a> <a href="/tags/AngularJS/" style="font-size: 12.5px;">AngularJS</a> <a href="/tags/Azure/" style="font-size: 10px;">Azure</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/Connection-String/" style="font-size: 10px;">Connection String</a> <a href="/tags/Database/" style="font-size: 17.5px;">Database</a> <a href="/tags/Dependency-Injection/" style="font-size: 10px;">Dependency Injection</a> <a href="/tags/Globalization/" style="font-size: 10px;">Globalization</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/Identity/" style="font-size: 10px;">Identity</a> <a href="/tags/InkCanvas/" style="font-size: 10px;">InkCanvas</a> <a href="/tags/IronPython/" style="font-size: 12.5px;">IronPython</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Linq/" style="font-size: 10px;">Linq</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Ninject/" style="font-size: 10px;">Ninject</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/Performance-Tuning/" style="font-size: 10px;">Performance Tuning</a> <a href="/tags/Python/" style="font-size: 12.5px;">Python</a> <a href="/tags/Razor/" style="font-size: 10px;">Razor</a> <a href="/tags/SOLID/" style="font-size: 10px;">SOLID</a> <a href="/tags/SQL/" style="font-size: 17.5px;">SQL</a> <a href="/tags/SQL-Performance-Tuning/" style="font-size: 10px;">SQL Performance Tuning</a> <a href="/tags/SQL-Server/" style="font-size: 12.5px;">SQL Server</a> <a href="/tags/Serverless/" style="font-size: 10px;">Serverless</a> <a href="/tags/TypeScript/" style="font-size: 12.5px;">TypeScript</a> <a href="/tags/WebAPI/" style="font-size: 10px;">WebAPI</a> <a href="/tags/XAML/" style="font-size: 12.5px;">XAML</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/31/Angular-Server-Side-Rendering-on-AWS-Lambda/">Angular Server Side Rendering on AWS Lambda</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/Create-Download-Link/">Create &#34;Download&#34; Link</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/27/Best-practices-to-keep-the-sensitive-information-secret/">Best practices to keep the sensitive information out of the source code and secret in Azure</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/21/SOLID-Principles/">OOP Principles - SOLID</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/07/Benefit-Of-Using-IoC-Container/">Benefit of using IoC Container</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id='foot-stars'></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jun Hashimoto<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'brainmine';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/sh/shCore.js"></script>
+<script src="/js/sh/shBrushCSharp.js"></script>
+<script src="/js/sh/shBrushJScript.js"></script>
+<script src="/js/sh/shBrushSql.js"></script>
+<script src="/js/sh/shBrushBash.js"></script>
+<script src="/js/sh/shBrushPython.js"></script>
+<script src="/js/sh/shBrushPlain.js"></script>
+<script src="/js/sh/shBrushXml.js"></script>
+<script>
+SyntaxHighlighter.all();
+</script>
+  </div>
+</body>
+</html>
